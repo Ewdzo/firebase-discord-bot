@@ -12,7 +12,7 @@ export const data = new SlashCommandBuilder()
   .setDescription("Download a file from url and returns it.");
 
 export const execute = async (interaction: CommandInteraction) => {
-  await interaction.deferReply();
+  await interaction.deferReply({ephemeral: true});
   
   const URL = <string>interaction.options.get("file-url")!.value;
   const downloadController = new DownloadController();
