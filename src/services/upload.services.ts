@@ -28,8 +28,9 @@ export default class UploadService {
             };
         } catch(err) { 
             if(err instanceof ValidationExceptionError) throw err;
+            if(err.toString()) throw new ValidationExceptionError(400, err.toString()); 
 
-            throw new ValidationExceptionError(400, "Invalid or Broken URL"); 
+            throw new ValidationExceptionError(400, err); 
         }
     }
 }
