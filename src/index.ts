@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.once("ready", () => {
-  console.log("Discord bot is ready! 🤖");
+  console.log("🔥 - Firebase Bot is Ready - 🔥");
 });
 
 client.on("guildCreate", async (guild) => {
