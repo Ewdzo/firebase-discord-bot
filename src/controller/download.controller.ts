@@ -12,7 +12,7 @@ export class DownloadController {
       return { files: files }
     } catch (error) {
       if (error instanceof ValidationExceptionError) {
-        return { embeds: [ new Embed("❌ Error - "+error.code, error.message, "9F2727") ] };
+        return { embeds: [ new Embed("❌ Error - " + error.code, error.message, "9F2727") ] };
       }
     }
   }
