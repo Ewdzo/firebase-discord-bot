@@ -3,7 +3,7 @@ import { fileTypeFromBuffer } from "file-type";
 import axios from "axios";
 
 export const data = new SlashCommandBuilder()
-  .setName("download-file")
+  .setName("download")
   .addStringOption(option =>
     option
       .setName('file-url')

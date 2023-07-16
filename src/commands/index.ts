@@ -1,5 +1,5 @@
-import * as downloadFile from "./downloadFile";
+import * as download from "./download";
 
 export const commands = {
-  downloadFile,
+  download,
 };
