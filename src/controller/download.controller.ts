@@ -1,8 +1,10 @@
+import { Embed } from "../classes";
 import { ValidationExceptionError } from "../exceptions/ValidationExceptionError";
 import DownloadService from "../services/download.services";
 
 export class DownloadController {
   public async handle(data: string) {
+    console.log(data);
     const downloadService = new DownloadService();
 
     try {
@@ -14,7 +16,7 @@ export class DownloadController {
     } catch (error) {
       if (error instanceof ValidationExceptionError) {
         return { 
-          content: error.code + " - " + error.message 
+          embeds: [ new Embed("❌ Error - "+error.code, error.message, "9F2727") ]
         };
       }
     }
