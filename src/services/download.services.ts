@@ -1,28 +1,28 @@
-import Axios from "axios";
-import { ValidationExceptionError } from "../exceptions/ValidationExceptionError";
 import { fileTypeFromBuffer } from "file-type";
+import { ValidationExceptionError } from "../exceptions/ValidationExceptionError";
+import { firebaseDB } from "../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 export default class DownloadService {
-    public async download(url: string) {
+    public async download(name: string) {
         try {
-            const response = await Axios.get(url, {responseType: 'arraybuffer'});
-                    
-            if(response.headers["content-length"] > 26214400){
-                throw new ValidationExceptionError(413, "File over 25MiB");
-            }
+            const collectionRef = collection(firebaseDB, name);
+            const data = await getDocs(collectionRef);
+            const results = data.docs.map((doc) => (doc.data()));
+            const files = await Promise.all(results.map(async (file) => { 
+                const attachment = Buffer.from(file.base64File, "base64");
+                const type = await fileTypeFromBuffer(attachment).then(response => response!.ext);
+                
+                return { attachment: attachment, name: file.hashFile + "." + type };
+            }));
 
-            const base64File = Buffer.from(response.data).toString('base64');
-            const data = Buffer.from(base64File, "base64");
-            const fileType = await fileTypeFromBuffer(data).then(response => response!.ext);
-            
-            return {
-                data: data, 
-                type: fileType
-            };
+            if(!files.length) throw new ValidationExceptionError(404, "No files found"); 
+
+            return files;
         } catch(err) { 
-            if(err instanceof ValidationExceptionError) throw err;
+            if(err.toString()) throw new ValidationExceptionError(400, err.toString()); 
 
-            throw new ValidationExceptionError(400, "Invalid or Broken URL"); 
+            throw new ValidationExceptionError(400, err); 
         }
     }
 }

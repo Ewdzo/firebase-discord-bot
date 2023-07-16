@@ -6,17 +6,19 @@ export const data = new SlashCommandBuilder()
   .addStringOption(option =>
     option
       .setName('file-url')
-      .setDescription('URL to file you want to return;')
+      .setDescription('Return all data from firebase;')
       .setRequired(true)
+      .addChoices({name: "Images", value:"images"}, {name:"Documents", value:"documents"}, {name:"Else", value:"else"})
   )
   .setDescription("Download a file from url and returns it.");
 
 export const execute = async (interaction: CommandInteraction) => {
   await interaction.deferReply({ephemeral: true});
   
-  const URL = <string>interaction.options.get("file-url")!.value;
+  const collection = <string>interaction.options.get("collection")!.value;
   const downloadController = new DownloadController();
-  const response = (await downloadController.handle(URL))!;
+  const response = (await downloadController.handle(collection))!;
+  
   
   interaction.editReply(response);
 }
