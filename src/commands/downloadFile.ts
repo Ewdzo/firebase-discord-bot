@@ -3,14 +3,14 @@ import { fileTypeFromBuffer } from "file-type";
 import axios from "axios";
 
 export const data = new SlashCommandBuilder()
-  .setName("ping-file")
+  .setName("download-file")
   .addStringOption(option =>
     option
       .setName('file-url')
-      .setDescription('URL to file you want to show;')
+      .setDescription('URL to file you want to return;')
       .setRequired(true)
   )
-  .setDescription("Sends a ping message!");
+  .setDescription("Download a file from url and returns it.");
 
 export const execute = async (interaction: CommandInteraction) => {
   await interaction.deferReply();

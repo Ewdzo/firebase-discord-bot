@@ -1,5 +1,5 @@
-import * as ping from "./ping";
+import * as downloadFile from "./downloadFile";
 
 export const commands = {
-  ping,
+  downloadFile,
 };
