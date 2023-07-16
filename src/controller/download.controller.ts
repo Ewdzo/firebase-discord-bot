@@ -4,7 +4,6 @@ import DownloadService from "../services/download.services";
 
 export class DownloadController {
   public async handle(data: string) {
-    console.log(data);
     const downloadService = new DownloadService();
 
     try {
