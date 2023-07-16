@@ -14,6 +14,7 @@ export const data = new SlashCommandBuilder()
       .setName('collection')
       .setDescription('Firestore Collection to store the file;')
       .setRequired(true)
+      .addChoices({name: "Images", value:"images"}, {name:"Documents", value:"documents"}, {name:"Else", value:"else"})
   )
   .setDescription("Download a file from url and uploads it to a Firestore Collection. ( Limit: 1Mib )");
 
