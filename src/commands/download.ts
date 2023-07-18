@@ -5,12 +5,12 @@ export const data = new SlashCommandBuilder()
   .setName("download")
   .addStringOption(option =>
     option
-      .setName('file-url')
-      .setDescription('Return all data from firebase;')
+      .setName('collection')
+      .setDescription('Firestore Collection where file is currently stored;')
       .setRequired(true)
       .addChoices({name: "Images", value:"images"}, {name:"Documents", value:"documents"}, {name:"Else", value:"else"})
   )
-  .setDescription("Download a file from url and returns it.");
+  .setDescription("Returns all data from specified Firestore collection.");
 
 export const execute = async (interaction: CommandInteraction) => {
   await interaction.deferReply({ephemeral: true});
