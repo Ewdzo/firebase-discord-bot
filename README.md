@@ -43,7 +43,7 @@ Uses Firestore and Discord as main tools to work.
 </ul>
 
 
-Create a Firebase Database app in (https://firebase.google.com/) and insert it's credentials into .env as show in .env.example.
+Create a Firebase Database app in (https://firebase.google.com/) and insert it's credentials into .env as show in .env.example.<br>
 Create a Discord app in (https://discord.com/developers/applications) and insert it's token and client-id into .env as show in .env.example.
 
 After setting up, you can start the project with: 
