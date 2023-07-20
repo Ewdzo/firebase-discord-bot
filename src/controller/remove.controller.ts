@@ -4,10 +4,10 @@ import RemoveService from "../services/remove.services";
 
 export class RemoveController {
   public async handle(hash: string, collection: string) {
-    const uploadService = new RemoveService();
+    const removeService = new RemoveService();
 
     try {
-      const response = await uploadService.remove(hash, collection);
+      const response = await removeService.remove(hash, collection);
 
       return { 
         embeds: [ new Embed("🗑️ - Remotion Completed", response.data + " was removed from " + response.collection, "DEA534")]
